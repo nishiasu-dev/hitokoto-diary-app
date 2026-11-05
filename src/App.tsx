@@ -7,6 +7,15 @@ import './App.css';
 
 // const COLORS = ['#d53d45', '#3d7fd5', '#51cf66', '#b197fc', '#ffa94d'];
 
+// 日記データの型定義
+
+type DiaryEntry = {
+  id: string;
+  date: string;
+  memberId: string;
+  text: string;
+};
+
 const defaultMembers = [
   {
     id: 'member-1',
@@ -65,7 +74,7 @@ function App() {
   const [selectedMember, setSelectedMember] = useState(members[0].id);
   const [inputText, setInputText] = useState('');
 
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [isEntriesLoaded, setIsEntriesLoaded] = useState(false);
 
   // ------------------------------
@@ -95,7 +104,7 @@ function App() {
     // const isToday = currentYear===todayYear && currentMonth===todayMonth && i === todayDate;
 
     //日付ごとに「2026-10-07」形式の文字データを生成
-    const dateString = `${currentYear}-${String(currentMonth + 1).padStart(2, 0)}-${String(i).padStart(2, 0)}`;
+    const dateString = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
     //console.log(dateString);
 
     //それが現在選択中の日付と等しかったら…という条件
@@ -135,7 +144,7 @@ function App() {
   }
 
   //★表示月変更
-  const changeMonth = (offset) => {
+  const changeMonth = (offset: number) => {
     const newDate = new Date(currentYear, currentMonth + offset);
     setCurrentYear(newDate.getFullYear());
     setCurrentMonth(newDate.getMonth());
