@@ -195,6 +195,15 @@ function App() {
     setNewMember('');
   };
 
+  //メンバー削除処理
+  const handleDeleteMember = (id) => {
+    const result = confirm('本当にこのメンバーを削除する？');
+    if (!result) return;
+
+    setMembers((prevMembers) => prevMembers.filter((member) => id !== member.id));
+    alert('メンバーを削除したよ！');
+  };
+
   //初期読み込み時＆entries更新時にローカルストレージに自動保存
   useEffect(() => {
     if (!isEntriesLoaded) return;
@@ -263,7 +272,7 @@ function App() {
               {members.map((member) => (
                 <li key={member.id}>
                   <input type='text' value={member.name} />
-                  <button>削除</button>
+                  <button onClick={() => handleDeleteMember(member.id)}>削除</button>
                 </li>
               ))}
             </ul>
