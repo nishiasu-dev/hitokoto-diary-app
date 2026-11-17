@@ -196,7 +196,7 @@ function App() {
   };
 
   //メンバー削除処理
-  const handleDeleteMember = (id) => {
+  const handleDeleteMember = (id: string) => {
     const result = confirm('本当にこのメンバーを削除する？');
     if (!result) return;
 
